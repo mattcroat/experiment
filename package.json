@@ -1,4 +1,10 @@
 {
 	"name": "experiment",
-	"version": "1.0.0"
+	"version": "1.0.0",
+	"scripts": {
+		"docs:dev": "pnpm -F docs run dev",
+		"docs:build": "pnpm -F docs run build",
+		"docs:preview": "pnpm -F docs run preview",
+		"update": "pnpm -r update -i -L"
+	}
 }
