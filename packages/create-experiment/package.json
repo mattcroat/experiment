@@ -1,0 +1,5 @@
+{
+	"name": "create-experiment",
+	"version": "1.0.0",
+	"bin": "./cli/bin.js"
+}
