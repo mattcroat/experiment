@@ -1,6 +1,10 @@
 {
 	"name": "@joyofcode/create",
-	"version": "1.0.1",
-	"main": "index.js",
-	"bin": "./cli/bin.js"
+	"version": "1.0.2",
+	"main": "./index.js",
+	"bin": "./cli/bin.js",
+	"type": "module",
+	"dependencies": {
+		"@clack/prompts": "^0.6.3"
+	}
 }
