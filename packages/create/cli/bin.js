@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+import fs from 'node:fs'
+import path from 'node:path'
+import util from 'node:util'
+import { exec } from 'node:child_process'
 import {
 	cancel,
 	confirm,
@@ -9,10 +13,6 @@ import {
 	spinner,
 	text,
 } from '@clack/prompts'
-import fs from 'node:fs'
-import path from 'node:path'
-import { exec } from 'node:child_process'
-import util from 'node:util'
 
 const execSync = util.promisify(exec)
 
@@ -58,9 +58,6 @@ async function main() {
 		}
 	}
 
-	// copy the template
-	copy('template', cwd)
-
 	// dependencies step
 	const dependencies = await confirm({
 		message: 'Install dependencies? (requires pnpm)',
@@ -71,30 +68,33 @@ async function main() {
 		return process.exit(0)
 	}
 
+	// copy the template
+	await copy('template', cwd)
+
 	if (dependencies) {
 		const s = spinner()
 
 		s.start('Installing dependencies...')
 
-		// try {
-		// 	await execSync('pnpm i')
-		// } catch (e) {
-		// 	console.log()
-		// 	console.log('pnpm is required.')
-		// 	console.log('You can run `npm i -g pnpm.`')
-		// 	return process.exit(0)
-		// }
+		try {
+			await execSync('pnpm i')
+		} catch (e) {
+			console.log()
+			console.log('📦️ pnpm is required:')
+			console.log('npm i -g pnpm')
+			return process.exit(0)
+		}
 
 		s.stop('Installed dependencies.')
 	}
 
 	outro('Done. 🪄')
 
-	console.log('Start the development server:')
+	console.log('💿️ Start the development server:')
 	console.log('pnpm run dev')
 	console.log()
-	console.log('To close the dev server, press `Ctrl + C`.')
-	console.log('💬 Discord: https://joyofcode.xyz/invite')
+	console.log('💬 Discord')
+	console.log('https://joyofcode.xyz/invite')
 }
 
 main().catch(console.error)

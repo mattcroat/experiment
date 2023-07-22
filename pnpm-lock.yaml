@@ -41,6 +41,33 @@ importers:
         specifier: ^4.4.2
         version: 4.4.2
 
+  packages/create/test:
+    devDependencies:
+      '@sveltejs/adapter-auto':
+        specifier: ^2.0.0
+        version: 2.0.0(@sveltejs/kit@1.20.4)
+      '@sveltejs/adapter-static':
+        specifier: ^2.0.2
+        version: 2.0.2(@sveltejs/kit@1.20.4)
+      '@sveltejs/kit':
+        specifier: ^1.20.4
+        version: 1.20.4(svelte@4.0.5)(vite@4.4.2)
+      svelte:
+        specifier: ^4.0.5
+        version: 4.0.5
+      svelte-check:
+        specifier: ^3.4.3
+        version: 3.4.3(svelte@4.0.5)
+      tslib:
+        specifier: ^2.4.1
+        version: 2.4.1
+      typescript:
+        specifier: ^5.0.0
+        version: 5.0.2
+      vite:
+        specifier: ^4.4.2
+        version: 4.4.2
+
   packages/docs:
     devDependencies:
       '@sveltejs/adapter-auto':
