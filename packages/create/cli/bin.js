@@ -9,6 +9,7 @@ import {
 	confirm,
 	intro,
 	isCancel,
+	note,
 	outro,
 	spinner,
 	text,
@@ -27,7 +28,7 @@ async function main() {
 
 	intro('Welcome to Animotion!')
 
-	// create the project step
+	// create the project
 	const dir = await text({
 		message: 'Where should I create your project?',
 		placeholder: '(press Enter to use the current directory)',
@@ -43,22 +44,22 @@ async function main() {
 	// check if directory is empty
 	if (fs.existsSync(cwd)) {
 		if (fs.readdirSync(cwd).length > 0) {
-			const wantToContinue = await confirm({
+			const shouldContinue = await confirm({
 				message: 'Directory not empty. Continue?',
 			})
 
-			if (isCancel(wantToContinue)) {
+			if (isCancel(shouldContinue)) {
 				cancel('Operation cancelled.')
 				return process.exit(0)
 			}
 
-			if (!wantToContinue) {
+			if (!shouldContinue) {
 				return process.exit(1)
 			}
 		}
 	}
 
-	// dependencies step
+	// ask to install dependencies
 	const dependencies = await confirm({
 		message: 'Install dependencies? (requires pnpm)',
 	})
