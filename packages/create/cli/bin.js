@@ -17,8 +17,13 @@ import {
 
 const execSync = util.promisify(exec)
 
+import { fileURLToPath } from 'node:url'
+
 async function copy(from, to) {
-	const template = path.join(__dirname, '../template')
+	const template = path.join(
+		path.dirname(fileURLToPath(import.meta.url)),
+		'../template'
+	)
 	const destination = path.join(process.cwd(), to)
 	await fs.cpSync(template, destination, { recursive: true })
 }
