@@ -9,7 +9,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		paths: {
-			base: dev ? '' : '/docs',
+			base: dev ? '' : '/experiment',
 		},
 	},
 }
