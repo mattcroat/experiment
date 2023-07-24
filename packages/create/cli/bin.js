@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 
+import { exec } from 'node:child_process'
 import fs from 'node:fs'
 import path from 'node:path'
 import util from 'node:util'
-import { exec } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 import {
 	cancel,
 	confirm,
 	intro,
 	isCancel,
-	note,
 	outro,
 	spinner,
 	text,
@@ -17,15 +17,11 @@ import {
 
 const execSync = util.promisify(exec)
 
-import { fileURLToPath } from 'node:url'
-
 async function copy(from, to) {
-	const template = path.join(
-		path.dirname(fileURLToPath(import.meta.url)),
-		'../template'
-	)
-	const destination = path.join(process.cwd(), to)
-	await fs.cpSync(template, destination, { recursive: true })
+	const modulePath = fileURLToPath(import.meta.url)
+	const templateDir = path.join(path.dirname(modulePath), from)
+	const destinationDir = path.join(process.cwd(), to)
+	await fs.cpSync(templateDir, destinationDir, { recursive: true })
 }
 
 async function main() {
@@ -75,7 +71,7 @@ async function main() {
 	}
 
 	// copy the template
-	await copy('template', cwd)
+	await copy('../template', cwd)
 
 	if (dependencies) {
 		const s = spinner()
@@ -83,7 +79,7 @@ async function main() {
 		s.start('Installing dependencies...')
 
 		try {
-			await execSync('pnpm i')
+			await execSync('pnpm i', { cwd })
 		} catch (e) {
 			console.log()
 			console.log('📦️ pnpm is required:')
