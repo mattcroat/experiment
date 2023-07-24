@@ -18,7 +18,7 @@ import {
 const execSync = util.promisify(exec)
 
 async function copy(from, to) {
-	const template = path.join(process.cwd(), from)
+	const template = '../template'
 	const destination = path.join(process.cwd(), to)
 	await fs.cpSync(template, destination, { recursive: true })
 }
